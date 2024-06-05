@@ -1,0 +1,59 @@
+@charset "UTF-8";
+.product-item {
+    margin-bottom: 30px;
+    position: relative;
+    padding: 30px 15px;
+
+}
+
+.card {
+    border: none;
+    transition: transform 0.2s ease-in-out;
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-top {
+    border-radius: 10px;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.card-text {
+    color: #6c757d; /* Màu chữ xám nhạt */
+}
+
+.btn-primary {
+    background-color: #0C713D;
+    border-color: #0C713D;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btn-primary:hover {
+    background-color: #056839;
+    border-color: #056839;
+}
+
+
+
+/* Màu chữ trắng cho thanh điều hướng */
+.navbar-nav .nav-link,
+.navbar-toggler-icon {
+    color: #fff; /* Màu chữ trắng */
+}
+
+/* Màu chữ trắng cho dropdown */
+.dropdown-menu .dropdown-item {
+    color: #000 !important; /* Màu chữ trắng và ghi đè trên các thuộc tính khác */
+}
+

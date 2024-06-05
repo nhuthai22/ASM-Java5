@@ -1,0 +1,295 @@
+@charset "UTF-8";
+/* Phần CSS mới */
+
+.page-heading {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.page-heading h1 {
+    font-size: 36px;
+    color: #333;
+}
+
+.separator-icon {
+    width: 50px;
+    height: 3px;
+    margin: 20px auto;
+    background-color: #ccc;
+}
+
+.menu {
+    margin-top: 30px;
+}
+
+.menu .nav-link {
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.menu .nav-link.active,
+.menu .nav-link:hover {
+    color: #0C713D;
+}
+
+.category-toolbar {
+    background-color: #f9f9f9;
+    padding: 30px 0;
+}
+
+.category-toolbar form {
+    margin-bottom: 0;
+}
+
+.category-toolbar select,
+.category-toolbar input[type="text"] {
+    width: 70%;
+}
+
+.product-item {
+    margin-bottom: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
+
+.product-item:hover {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+
+.item-img {
+    border-radius: 10px 10px 0 0;
+}
+
+.item-info {
+    padding: 20px;
+}
+
+.item-name {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #333;
+    margin-top: 10px;
+}
+
+.item-price {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #0C713D;
+    margin-top: 10px;
+}
+
+.add-to-cart {
+    background-color: #0C713D;
+    border-color: #0C713D;
+    color: #fff;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background-color: #056839;
+}
+
+.grid-item {
+    padding: 30px 0;
+}
+
+
+#news-detail .info-detail h1 {
+    font-family: 'Lora';
+    font-size: 36px;
+    line-height: 50px; /* Thêm dòng này */
+}
+
+.category-product .cat-item .cat-content .description {
+    line-height: 34px;
+}
+
+.page-heading h1 {
+    font-family: 'Lora';
+}
+
+.h_menu .container .h_menu__main > li a {
+    padding: 10px 15px;
+    font-size: 15px;
+}
+
+.h_logo__img section {
+    position: relative;
+    height: 70px;
+}
+
+.h_logo__img section a > img {
+    position: absolute !important;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1px 5px;
+}
+
+.h_logo__img section a > img.top {
+    animation-name: fade;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-duration: 7s;
+    animation-direction: alternate;
+    background: white;
+}
+
+.h_logo__img section a > img.middle {
+    animation-name: fade2;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-duration: 7s;
+    animation-direction: alternate;
+    background: white;
+}
+
+img.bottom {
+    background: white;
+}
+
+.header-pl .lang-wrapper {
+    margin-top: 7px;
+    float: right;
+}
+
+.header-pl .lang-wrapper a {
+    line-height: 19px;
+}
+
+.lang-wrapper >a.active {
+    color: #00713d;
+    font-weight: bold;
+}
+
+.mg-right {
+    padding-right: 50px;
+}
+
+.mg-left {
+    padding-left: 50px;
+}
+
+@media screen and (max-width: 767px) {
+    /* Các quy tắc dành cho màn hình nhỏ hơn 767px */
+
+    .h_menu .container .h_menu__main > li:hover .h_menu__sub {
+        display: none;
+    }
+
+    .h_menu .container .h_menu__main > li.active:hover .h_menu__sub {
+        display: block;
+    }
+
+    .category-drink .product-item.sticky .item-info {
+        text-align: left;
+        bottom: 15px;
+        width: calc(100% - 80px);
+        position: absolute;
+        left: 40px;
+        right: auto;
+        top: 50px;
+        height: auto;
+        -webkit-transform: translateX(0%);
+        -ms-transform: translateX(0%);
+        transform: translateX(0%);
+    }
+
+    .category-drink .product-item.sticky .item-wrapper > .img-responsive {
+        width: auto;
+        float: none;
+        margin: 0 auto;
+        padding-top: 250px;
+        padding-bottom: 20px;
+    }
+
+    .grid-item .sticky.product-item {
+        max-height: none;
+    }
+
+    .category-drink .product-item.sticky .item-desc {
+        max-height: 52px;
+        overflow: hidden;
+        height: 52px;
+    }
+
+    .col-xs-12,
+    .col-xs-6:nth-child(2n+1),
+    .col-xs-4:nth-child(3n+1),
+    .col-xs-3:nth-child(4n+1),
+    .col-xs-2:nth-child(6n+1) {
+        clear: none;
+    }
+
+    .ss-1 .row-2 {
+        display: block!important;
+        width: 100%;
+        margin: 0;
+    }
+
+    .ss-1 .row-2 .col-sm-6 {
+        display: block !important;
+        vertical-align: middle !important;
+        width: 100%;
+    }
+
+    .ss-1 .row-2 .img {
+        width: 100% !important;
+    }
+
+    .intro_info img {
+        height: auto !important;
+    }
+}
+
+.header-pl .lang-wrapper {
+    margin-right: 10px;
+}
+
+.header-pl .h_account {
+    margin-right: 0;
+}
+
+#about-us .h_menu__sub {
+    width: 60%;
+    left: auto;
+    right: 0;
+    min-width: 600px;
+}
+
+.h_menu .container .h_menu__main > li {
+    margin: 0 10px 0 10px;
+}
+
+.h_menu .container .h_menu__main > li .h_menu__sub ul li ul li a {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+#home_story svg {
+    height: 80px;
+}
+
+.content_fields>div>div h2 {
+    font-size: 24px;
+}
+
+.content_fields h2 {
+    font-family: sans-serif;
+}
+
+.grid-item .product-item > .item-wrapper .item-name {
+    -webkit-line-clamp: initial !important;
+}
+
+.h_menu .container .h_menu__box {
+    height: calc(100% - 70px);
+}
+

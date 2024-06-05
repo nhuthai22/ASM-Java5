@@ -1,0 +1,30 @@
+@charset "UTF-8";
+.introduce {
+    background-color: #f8f9fa; /* Màu nền */
+    padding: 50px 0; /* Khoảng cách giữa phần nội dung và viền */
+}
+
+.list_title {
+    font-size: 36px; /* Kích thước phông chữ */
+    color: #6c757d; /* Màu chữ */
+    margin-bottom: 30px; /* Khoảng cách dưới */
+}
+
+.intro_info {
+    background-color: #fff; /* Màu nền của phần thông tin */
+    padding: 30px; /* Khoảng cách giữa phần thông tin và viền */
+    border-radius: 10px; /* Đường viền cong */
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1); /* Hiệu ứng bóng */
+}
+
+.intro_info h1 {
+    margin-bottom: 20px; /* Khoảng cách dưới cho tiêu đề */
+}
+
+.intro_info p {
+    margin-bottom: 20px; /* Khoảng cách dưới cho đoạn văn */
+}
+
+.intro_info iframe {
+    border: none; /* Loại bỏ đường viền của iframe */
+}
