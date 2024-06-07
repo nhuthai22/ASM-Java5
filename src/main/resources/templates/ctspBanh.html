@@ -251,6 +251,27 @@
 
         // Append product container to the row
         document.querySelector('.row').appendChild(productContainer);
+
+        const addBtn = document.querySelector('.add-to-cart');
+        addBtn.addEventListener('click', () => {
+        const id = product.id;
+        const name = product.name;
+        const num = 0;
+        const price = product.price;
+        localStorage.setItem('product', JSON.stringify({
+            id,
+            name,
+            price,
+
+        }))
+        })
+        const product2 = JSON.parse(localStorage.getItem('product'));
+        const id2 = product2.id;
+        const name2 = product2.name;
+        const price2 = product2.price;
+        console.log(id2);
+        console.log(name2);
+        console.log(price2);
     }
 </script>
 

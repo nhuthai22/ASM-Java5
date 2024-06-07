@@ -30,8 +30,8 @@ public class Banh {
     @Column(name = "image")
     private byte[] img;
     
-    @Column(name = "quantity")
-    private int quantity;
+//    @Column(name = "quantity")
+//    private int quantity;
 
     public int getId() {
         return id;
@@ -65,13 +65,13 @@ public class Banh {
         this.img = img;
     }
 
-	public int getQuantity() {
-		return quantity;
-	}
+//	public int getQuantity() {
+//		return quantity;
+//	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+//	public void setQuantity(int quantity) {
+//		this.quantity = quantity;
+//	}
 
 	public byte[] getImg() {
 		return img;
