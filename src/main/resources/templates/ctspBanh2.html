@@ -3,12 +3,480 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="trasua.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>CTSP Trà Sữa</title>
+    <title>Trà sữa</title>
+    <style type="text/css">
+    @charset "UTF-8";
+/* Phông chữ và màu sắc */
+body {
+    font-family: 'Arial', sans-serif; /* Sử dụng font chữ Arial hoặc các font sans-serif khác */
+    color: #333; /* Màu chữ */
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9; /* Màu nền */
+}
+
+/* Phần có padding 10px */
+.home-padding {
+    padding: 10px;
+}
+
+/* Phần có nền màu f9f9f9 và margin-bottom 30px */
+.home-section {
+    background-color: #f9f9f9;
+    margin-bottom: 30px;
+}
+
+/* Container có max-width 1140px, canh giữa và có padding */
+.container {
+    max-width: 1140px;
+    margin: 0 auto; /* Canh giữa */
+    padding: 15px;
+}
+
+/* Grid system sử dụng flexbox */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+}
+
+/* Các phần có margin-bottom 30px */
+.row-1, .row-2 {
+    margin-bottom: 30px;
+}
+
+/* Các cột có padding và box-sizing */
+.col-sm-12, .col-md-7, .col-md-5, .col-sm-6 {
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+/* Các item có nền màu trắng, box-shadow và transition */
+.item {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    transition: box-shadow 0.3s ease;
+}
+
+/* Hiệu ứng box-shadow khi hover */
+.item:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Các hình ảnh có hiệu ứng scale khi hover */
+.img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+
+/* Hiệu ứng scale khi hover */
+.img:hover {
+    transform: scale(1.05);
+}
+
+/* Tiêu đề có font-size, màu và margin-bottom */
+.title {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: #2d2d2d;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Văn bản có font-size, line-height, màu và margin-bottom */
+p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Liên kết có màu và bỏ gạch chân */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+/* Hiệu ứng underline khi hover */
+a:hover {
+    text-decoration: underline;
+}
+
+/* Các nút có padding, font-size, text-align, border-radius và transition */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Nút chính có màu nền và màu chữ */
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Hiệu ứng màu nền khác khi hover */
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Nút mặc định có màu nền và màu chữ */
+.btn-default {
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+/* Hiệu ứng màu nền khác khi hover */
+.btn-default:hover {
+    background-color: #e2e6ea;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    /* Các cột trong grid system thay đổi flex và max-width */
+    .col-md-7, .col-md-5, .col-sm-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    /* Các item có padding thay đổi */
+    .item {
+        padding: 15px;
+    }
+
+    /* Tiêu đề có font-size thay đổi */
+    .title {
+        font-size: 1.5em;
+    }
+    
+    /* Các nút có chiều rộng thay đổi */
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Dropdown menu */
+.dropdown-menu .dropdown-item {
+    color: #FFFFFF; /* Màu chữ */
+}
+
+/* Màu nền dropdown menu */
+.dropdown-menu {
+    background-color: #000000; /* Màu nền */
+}
+
+/* Kích thước ảnh trong carousel */
+.carousel-item img {
+    max-height: 300px; /* Chiều cao tối đa */
+    width: auto; /* Chiều rộng tự động */
+    margin: auto; /* Canh giữa theo chiều ngang */
+}
+
+/* Vị trí các chỉ số trong carousel */
+.carousel-indicators {
+    bottom: 10px; /* Khoảng cách từ dưới */
+}
+
+/* Định dạng layout của phần store */
+.home-section {
+    padding: 50px 0; /* Padding */
+}
+
+/* Phần thông tin bản đồ */
+.map-info {
+    margin-top: 30px; /* Khoảng cách với tiêu đề */
+}
+
+/* Danh sách thông tin bản đồ */
+.map-info__list {
+    padding-right: 30px; /* Khoảng cách bên phải */
+}
+
+/* Tiêu đề */
+.heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333; /* Màu chữ */
+    margin-bottom: 20px; /* Khoảng cách dưới */
+}
+
+/* Ô chọn */
+.selectpicker {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc; /* Đường viền */
+    border-radius:
+    5px; /* Độ cong viền */
+    margin-bottom: 15px; /* Khoảng cách dưới */
+}
+
+/* Phần chọn bản đồ */
+.map-chose {
+    display: flex;
+    justify-content: space-between; /* Canh trái và canh phải */
+}
+
+/* Nhóm form */
+.form-group {
+    flex: 1; /* Mở rộng để điền hết không gian */
+    margin-right: 10px; /* Khoảng cách giữa các option */
+}
+
+/* Định dạng select box */
+.selectpicker {
+    width: 100%; /* Đảm bảo mở rộng hết không gian */
+}
+
+/* Danh sách cửa hàng trên bản đồ */
+.map-list-store {
+    list-style: none;
+    padding-left: 0;
+}
+
+/* Mỗi cửa hàng trong danh sách */
+.map-list-store li {
+    margin-bottom: 15px; /* Khoảng cách dưới */
+}
+
+/* Liên kết trong danh sách cửa hàng */
+.map-list-store li a {
+    text-decoration: none;
+    color: #333; /* Màu chữ */
+    display: block;
+}
+
+/* Hiệu ứng màu chữ khi hover */
+.map-list-store li a:hover {
+    color: #007bff; /* Màu chữ khi hover */
+}
+
+/* Định dạng đoạn văn trong danh sách cửa hàng */
+.map-list-store li p {
+    margin: 0;
+    position: relative;
+}
+
+/* Nút trong danh sách cửa hàng */
+.map-list-store li a.btn {
+    margin-top: 5px;
+    background-color: #007bff; /* Màu nền nút */
+    color: #fff; /* Màu chữ nút */
+    border: none; /* Không có đường viền */
+    padding: 6px 12px; /* Kích thước nút */
+    border-radius: 4px; /* Độ cong viền */
+    text-decoration: none; /* Bỏ gạch chân */
+    cursor: pointer; /* Con trỏ */
+}
+
+/* Hiệu ứng màu nền nút khi hover */
+.map-list-store li a.btn:hover {
+    background-color: #0056b3; /* Màu nền khi hover */
+}
+
+/* Màu icon trắng */
+.h_cart__img svg {
+    fill: #fff; /* Màu fill của icon trắng */
+}
+/* Giỏ hàng */
+.h_cart__text {
+    font-size: 14px;
+    margin-right: 5px;
+    color: white; /* Màu chữ */
+}
+
+/* Số lượng trong giỏ hàng */
+.number {
+    position: absolute;
+    top: 0;
+    right: -8px;
+    background-color: red; /* Màu nền */
+    color: white; /* Màu chữ */
+    font-size: 10px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%; /* Độ cong */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Phần footer */
+#footer {
+    background-color: #f7f7f7; /* Màu nền */
+    padding: 30px 0; /* Padding */
+}
+
+/* Container trong footer */
+#footer .container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Phần dưới footer */
+#footer .f-bot {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+/* Bản quyền trong footer */
+#footer .f-bot .f-copyright {
+    color: #555; /* Màu chữ */
+    font-size: 14px;
+}
+
+/* Tiêu đề bản quyền */
+#footer .f-bot .f-copyright b {
+    color: #333; /* Màu chữ */
+}
+
+/* Theo dõi trong footer */
+#footer .f-bot .f-follow {
+    margin-top: 15px;
+    color: #555; /* Màu chữ */
+    font-size: 14px;
+}
+
+/* Tiêu đề trong form trong footer */
+#footer .f-bot .f-follow label {
+    color: #333; /* Màu chữ */
+}
+
+/* Danh sách các mục trong footer */
+#footer .f-bot ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+/* Mỗi mục trong danh sách footer */
+#footer .f-bot ul li {
+    margin-bottom: 5px; /* Khoảng cách dưới */
+}
+
+/* Liên kết trong danh sách footer */
+#footer .f-bot ul li a {
+    color: #333; /* Màu chữ */
+    text-decoration: none; /* Bỏ gạch chân */
+}
+
+/* Hiệu ứng màu chữ khi hover trong footer */
+#footer .f-bot ul li a:hover {
+    color: #007bff; /* Màu chữ khi hover */
+}
+
+/* Ngôn ngữ trong footer */
+#footer .f-bot .f-language .lang-wrapper a {
+    color: #555; /* Màu chữ */
+    text-decoration: none; /* Bỏ gạch chân */
+}
+
+/* Ngôn ngữ được chọn trong footer */
+#footer .f-bot .f-language .lang-wrapper a.active {
+    color: #007bff; /* Màu chữ khi được chọn */
+}
+
+/* Ảnh đại diện của ngôn ngữ trong footer */
+#footer .f-bot .f-language .img-responsive {
+    margin-top: 10px; /* Khoảng cách từ trên */
+}
+
+/* Ngôn ngữ */
+.f-language {
+    display: flex;
+    flex-direction: column; /* Hiển thị theo chiều dọc */
+    align-items: center; /* Căn giữa theo chiều ngang */
+}
+
+/* Mỗi ngôn ngữ */
+.f-language a {
+    margin-bottom: 10px; /* Khoảng cách dưới */
+}
+
+/* Mạng xã hội */
+.f-social {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Mỗi biểu tượng mạng xã hội */
+.f-social li {
+    margin-right: 10px; /* Khoảng cách giữa các biểu tượng */
+}
+
+/* Không có khoảng cách bên phải cho biểu tượng cuối cùng */
+.f-social li:last-child {
+    margin-right: 0;
+}
+
+/* Biểu tượng mạng xã hội */
+.f-social li a {
+    display: inline-block;
+    font-size: 20px;
+    color: #000;
+}
+
+/* Màu chữ trắng cho thanh điều hướng */
+.navbar-nav .nav-link,
+.navbar-toggler-icon {
+    color: #fff; /* Màu chữ trắng */
+}
+
+/* Màu chữ trắng cho dropdown */
+.dropdown-menu .dropdown-item {
+    color: #000 !important; /* Màu chữ trắng và ghi đè trên các thuộc tính khác */
+}
+
+
+.logo-heading-container {
+    display: flex;
+    align-items: center;
+}
+.logo-heading-container h2 {
+    margin-left: 15px; /* Adjust this value as needed */
+}
+.logo-heading-container img {
+    filter: brightness(0) invert(1); /* Makes the logo white */
+}
+
+
+
+/* CSS */
+/* Đăng nhập link */
+.bi-person-circle {
+    margin-right: 5px; /* Khoảng cách với biểu tượng */
+}
+
+.nav-item {
+    display: flex; /* Sử dụng flexbox */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.nav-link {
+    color: #fff; /* Màu chữ */
+    text-decoration: none; /* Bỏ gạch chân */
+}
+    
+    </style>
 </head>
 <body>
 <header class="sticky-top bg-black">
@@ -74,13 +542,9 @@
         </div>
     </header>
     
-    <div class="grid-item category-drink">
-    	<div class="container">
-        	<div class="row" id="product-container">
-            <!-- Dữ liệu sản phẩm sẽ được thêm vào đây bằng JavaScript -->
-        	</div>
-    	</div>
-	</div>
+    <div class="container">
+        <div class="row"></div>
+    </div>
     
     <footer id="footer">
         <div class="f-bot">
@@ -126,9 +590,6 @@
                     </div>
 
                     <div class="col-md-2 col-xs-12 f-language">
-                        <a href="http://online.gov.vn/Home/WebDetails/96621">
-                            <img src="img/dathongbao.png" alt="dathongbao" class="img-responsive w-80" width="165px" style="background-color: #333;">
-                        </a>
                         <ul class="f-social">
                             <li>
                                 <a class="btn-icon" href="#"><i class="bi bi-facebook" aria-hidden="true"></i></a>
@@ -163,7 +624,7 @@
         // Lấy URL hiện tại
         var currentUrl = window.location.href;
         console.log(currentUrl);
-        
+
         // Tách URL để lấy ID sản phẩm
         var urlParts = currentUrl.split('/ctspBanh/');
         var productId = urlParts[urlParts.length - 1].split('?')[0];  // Extracts the product ID and removes any query parameters
@@ -230,7 +691,7 @@
         // Create "Go somewhere" link
         const link = document.createElement('a');
 
-        link.href = '/ctspTraSua/' + product.id;
+        link.href = '/ctspBanh/' + product.id;
 
 
         // Append elements to card body
@@ -271,6 +732,24 @@
         console.log(name2);
         console.log(price2);
     }
+ // Thêm hàm này vào trong hàm displayProductDetails để gán sự kiện click cho nút "Thêm vào giỏ hàng" của từng sản phẩm
+    function setupAddToCartButton(addBtn, product) {
+        addBtn.addEventListener('click', () => {
+            const id = product.id;
+            const name = product.name;
+            const num = 0;
+            const price = product.price;
+            localStorage.setItem('product', JSON.stringify({
+                id,
+                name,
+                price,
+            }));
+        });
+    }
+
+    // Sau khi tạo nút "Thêm vào giỏ hàng", gọi hàm setupAddToCartButton để gán sự kiện click cho nút đó
+    setupAddToCartButton(orderButton, product);
+
 </script>
 
 </body>
