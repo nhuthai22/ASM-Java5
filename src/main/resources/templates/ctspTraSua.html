@@ -112,7 +112,7 @@
                                 <input type="email" class="form-control" id="newsletter-email" name="newsletter-email" placeholder="Nhập địa chỉ email">
                             </div>
                             <button type="submit" class="btn btn-default">Gửi</button>
-                            <div class="loading-image"><img src="/images/loading.gif"></div>
+                            <div class="loading-image"></div>
 
                         </form>
                         <br/>
@@ -186,7 +186,7 @@
     function displayProductDetails(product) {
         // Create product container
         const productContainer = document.createElement('div');
-        productContainer.classList.add('container-fluid', 'my-3');
+        productContainer.classList.add('col-sm-3', 'col-6', 'product-item');
 
         // Create card
         const card = document.createElement('div');
@@ -195,7 +195,7 @@
         // Create card image
         const cardImg = document.createElement('img');
         cardImg.classList.add('card-img-top');
-        cardImg.src = product.imageUrl;
+        cardImg.src = product.img;
         cardImg.alt = product.ten;
 
         // Create card body
@@ -247,9 +247,28 @@
 
         // Append product container to the row
         document.querySelector('.row').appendChild(productContainer);
+
+        const addBtn = document.querySelector('.add-to-cart');
+        addBtn.addEventListener('click', () => {
+        const id = product.id;
+        const name = product.name;
+        const num = 0;
+        const price = product.price;
+        localStorage.setItem('product', JSON.stringify({
+            id,
+            name,
+            price,
+
+        }))
+        })
+        const product2 = JSON.parse(localStorage.getItem('product'));
+        const id2 = product2.id;
+        const name2 = product2.name;
+        const price2 = product2.price;
+        console.log(id2);
+        console.log(name2);
+        console.log(price2);
     }
-
-
 </script>
 
 </body>
