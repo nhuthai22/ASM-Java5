@@ -12,49 +12,49 @@
     <title>Bánh Ngọt</title>
 </head>
 <body>
-    <header class="sticky-top bg-black">
-        <div class="container d-flex justify-content-between align-items-center py-3">
-            <div class="logo-heading-container">
-                
-                <h2 class="m-0">
-                    <a th:href="@{/index}" class="text-white text-decoration-none">FiveStar</a>
-                </h2>
+<header class="sticky-top bg-black">
+    <div class="container d-flex justify-content-between align-items-center py-3">
+        <div class="logo-heading-container">
+
+            <h2 class="m-0">
+                <a th:href="@{/index}" class="text-white text-decoration-none">FiveStar</a>
+            </h2>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" th:href="@{/index}">Trang chủ</a>
+                    </li>
+                    <li class="nav-item dropdown" >
+                        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sản phẩm
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/detail}">Trà sữa</a></li>
+                            <li><a class="dropdown-item" th:href="@{/detail2}">Bánh</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" th:href="@{/gioithieu}">Giới thiệu</a>
+                    </li>
+                    <!-- HTML -->
+                    <li class="nav-item dropdown" >
+
+                        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i>Tài khoản
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/Login}">Đăng nhập</a></li>
+                            <li><a class="dropdown-item" th:href="@{/Register}">Đăng ký</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
             </div>
-            <nav class="navbar navbar-expand-lg navbar-light">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" th:href="@{/index}">Trang chủ</a>
-                        </li>
-                        <li class="nav-item dropdown" style="color: white">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              Sản phẩm
-                            </a>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" th:href="@{/detail}">Trà sữa</a></li>
-                              <li><a class="dropdown-item" th:href="@{/detail2}">Bánh</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" th:href="@{/gioithieu}">Giới thiệu</a>
-                        </li>          
-                        <!-- HTML -->
-                        <li class="nav-item dropdown" style="color: white">
-                        	
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              <i class="bi bi-person-circle"></i>Tài khoản
-                            </a>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" th:href="@{/Login}">Đăng nhập</a></li>
-                              <li><a class="dropdown-item" th:href="@{/Register}">Đăng ký</a></li>
-                            </ul>
-                        </li>
-						
-                    </ul>
-                </div>
 
                 <!-- giỏ hàng -->
                 <div class="h_right">
