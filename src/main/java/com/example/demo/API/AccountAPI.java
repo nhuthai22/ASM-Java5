@@ -46,10 +46,11 @@ public class AccountAPI {
         }
     }
     
- // Lớp POJO để chứa dữ liệu đăng nhập
+    // Lớp POJO để chứa dữ liệu đăng nhập
     static class AccountLoginRequest {
         private String username;
-        private String password;
+        private String password;	
+        
 		public String getUsername() {
 			return username;
 		}
@@ -63,5 +64,5 @@ public class AccountAPI {
 			this.password = password;
 		}      
     }
-    
+
 }
