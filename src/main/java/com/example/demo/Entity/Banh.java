@@ -27,8 +27,8 @@ public class Banh {
     @Column(name = "Gia")
     private double gia;
 
-    @Column(name = "image")
-    private byte[] img;
+    @Column(name = "images")
+    private String img;
     
 //    @Column(name = "quantity")
 //    private int quantity;
@@ -57,13 +57,15 @@ public class Banh {
         this.gia = gia;
     }
 
-    public String getImgBase64() {
-        return Base64.getEncoder().encodeToString(this.img);
-    }
+	public String getImg() {
+		return img;
+	}
 
-    public void setImg(byte[] img) {
-        this.img = img;
-    }
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+
 
 //	public int getQuantity() {
 //		return quantity;
@@ -73,8 +75,6 @@ public class Banh {
 //		this.quantity = quantity;
 //	}
 
-	public byte[] getImg() {
-		return img;
-	}
+	
     
 }

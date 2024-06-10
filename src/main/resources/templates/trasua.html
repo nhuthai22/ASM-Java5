@@ -155,7 +155,7 @@ placeholder="Tên sản phẩm"
                                     <input type="email" class="form-control" id="newsletter-email" name="newsletter-email" placeholder="Nhập địa chỉ email">
                                 </div>
                                 <button type="submit" class="btn btn-default">Gửi</button>
-                                <div class="loading-image"><img src="/images/loading.gif"></div>
+                                <div class="loading-image"></div>
     
                             </form>
                             <br/>
@@ -167,9 +167,7 @@ placeholder="Tên sản phẩm"
                         </div>
 
                         <div class="col-md-2 col-xs-12 f-language">
-                            <a href="http://online.gov.vn/Home/WebDetails/96621">
-                                <img src="img/dathongbao.png" alt="dathongbao" class="img-responsive w-80" width="165px" style="background-color: #333;">
-                            </a>
+                            
                             <ul class="f-social">
                                 <li>
                                     <a class="btn-icon" href="#"><i class="bi bi-facebook" aria-hidden="true"></i></a>
@@ -236,7 +234,7 @@ placeholder="Tên sản phẩm"
                         const productItem = `
                         <div class="col-sm-3 col-6 product-item">
                             <div class="card">
-                                <img class="card-img-top lazy" src="${traSua.imageUrl}" alt="${traSua.ten}">
+                                <img class="card-img-top lazy" src="${traSua.img}">
                                 <div class="card-body">
                                     <h5 class="card-title">${traSua.ten}</h5>
                                     <p class="card-text">${traSua.moTa}</p>

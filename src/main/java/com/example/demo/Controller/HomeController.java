@@ -54,13 +54,11 @@ public class HomeController {
     
     @GetMapping("/ctspTraSua/{id}")
     public String getCtspTra(){
-        return "/ctspTraSua"; 
+        return "/ctspTraSua2"; 
     }
     
     @GetMapping("/ctspBanh/{id}")
     public String getCtspBanh(){
-        return "/ctspBanh"; 
+        return "/ctspBanh2"; 
     }
-
-
 }
