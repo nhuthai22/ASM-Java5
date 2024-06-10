@@ -703,44 +703,47 @@ a:hover {
         // Append product container to the row
         document.querySelector('.row').appendChild(productContainer);
 
-        const addBtn = document.querySelector('.add-to-cart');
-        addBtn.addEventListener('click', () => {
-        const id = product.id;
-        const name = product.name;
-        const num = 0;
-        const price = product.price;
-        localStorage.setItem('product', JSON.stringify({
-            id,
-            name,
-            price,
+        orderButton.addEventListener('click', function() {
+            addToCart(product.id, product.ten, product.gia);
+        });
 
-        }))
-        })
-        const product2 = JSON.parse(localStorage.getItem('product'));
-        const id2 = product2.id;
-        const name2 = product2.name;
-        const price2 = product2.price;
-        console.log(id2);
-        console.log(name2);
-        console.log(price2);
     }
  // Thêm hàm này vào trong hàm displayProductDetails để gán sự kiện click cho nút "Thêm vào giỏ hàng" của từng sản phẩm
-    function setupAddToCartButton(addBtn, product) {
-        addBtn.addEventListener('click', () => {
-            const id = product.id;
-            const name = product.name;
-            const num = 0;
-            const price = product.price;
-            localStorage.setItem('product', JSON.stringify({
-                id,
-                name,
-                price,
-            }));
-        });
-    }
+ //    function setupAddToCartButton(addBtn, product) {
+ //        addBtn.addEventListener('click', () => {
+ //            const id = product.id;
+ //            const name = product.name;
+ //            const num = 0;
+ //            const price = product.price;
+ //            localStorage.setItem('product', JSON.stringify({
+ //                id,
+ //                name,
+ //                price,
+ //            }));
+ //        });
+ //    }
 
     // Sau khi tạo nút "Thêm vào giỏ hàng", gọi hàm setupAddToCartButton để gán sự kiện click cho nút đó
-    setupAddToCartButton(orderButton, product);
+    function addToCart(id, name, price) {
+        // Lấy giỏ hàng từ Local Storage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Kiểm tra sản phẩm có trong giỏ hàng chưa
+        let itemIndex = cart.findIndex(item => item.id === id);
+
+        if (itemIndex !== -1) {
+            // Nếu sản phẩm đã có trong giỏ hàng, tăng số lượng lên 1
+            cart[itemIndex].quantity += 1;
+        } else {
+            // Nếu sản phẩm chưa có trong giỏ hàng, thêm vào với số lượng là 1
+            cart.push({ id: id, name: name, price: price, quantity: 1 });
+        }
+
+        // Lưu giỏ hàng vào Local Storage
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        console.log('Cart updated:', cart);
+    }
 </script>
 </body>
 </html>
