@@ -59,12 +59,8 @@ body {
 }
 
 /* Các hình ảnh có hiệu ứng scale khi hover */
-.img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 5px;
-    transition: transform 0.3s ease;
+img {
+    image-rendering: auto;
 }
 
 /* Hiệu ứng scale khi hover */
@@ -172,7 +168,7 @@ a:hover {
 
 /* Kích thước ảnh trong carousel */
 .carousel-item img {
-    max-height: 300px; /* Chiều cao tối đa */
+    max-height: 400px; /* Chiều cao tối đa */
     width: auto; /* Chiều rộng tự động */
     margin: auto; /* Canh giữa theo chiều ngang */
 }
