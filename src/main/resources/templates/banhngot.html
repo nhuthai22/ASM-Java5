@@ -213,7 +213,7 @@
                                     Đặt hàng
                                     </button>
                                     <a href="/ctspBanh/${traSua.id}" class="btn btn-primary">Chi tiết</a>
-                                    <a href="/Cart" class="text-decoration-none">Add Cart</a>
+                                    <a href="/Cart" id="add-cart" class="text-decoration-none">Add Cart</a>
                                 </div>
                             </div>
                         </div>
@@ -233,6 +233,36 @@
         window.onload = function() {
             fetchTraSuaData();
         };
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lắng nghe sự kiện click cho phần tử có id là 'add-cart'
+            const addCartButton = document.getElementById('add-cart');
+            addCartButton.addEventListener('click', function(event) {
+                event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a> khi được click
+                addToCart(traSua.id, traSua.ten, traSua.gia); // Gọi hàm addToCart khi nút được click
+            });
+        });
+        function addToCart(id, name, price) {
+            Event.preventDefault();
+
+            // Lấy giỏ hàng từ Local Storage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Kiểm tra sản phẩm có trong giỏ hàng chưa
+            let itemIndex = cart.findIndex(item => item.id === id);
+
+            if (itemIndex !== -1) {
+                // Nếu sản phẩm đã có trong giỏ hàng, tăng số lượng lên 1
+                cart[itemIndex].quantity += 1;
+            } else {
+                // Nếu sản phẩm chưa có trong giỏ hàng, thêm vào với số lượng là 1
+                cart.push({ id: id, name: name, price: price, quantity: 1 });
+            }
+
+            // Lưu giỏ hàng vào Local Storage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            console.log('Cart updated:', cart);
+        }
     </script>
 </body>
 </html>

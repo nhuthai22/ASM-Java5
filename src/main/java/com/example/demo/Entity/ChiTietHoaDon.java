@@ -1,32 +1,51 @@
 package com.example.demo.Entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.time.LocalDateTime;
-
-@Getter
-@Setter
 @Entity
-@Table(name="ChiTietHoaDon")
+@Table(name = "ChiTietHoaDon")
 public class ChiTietHoaDon {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer maHD;
-
-    @Column(name="Ngay")
-    private LocalDateTime Ngay;
-
-    @Column(name="TongTien")
-    private float TongTien;
+    private Integer id;
+    private Integer soLuong;
+    private Float donGia;
 
     @ManyToOne
+    @JoinColumn(name = "maHD", nullable = false)
     private HoaDon hoaDon;
 
-    @ManyToOne
-    private Banh Banh;
+    // Getters và Setters
+    public Integer getId() {
+        return id;
+    }
 
-    @ManyToOne
-    private TraSua traSua;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(Integer soLuong) {
+        this.soLuong = soLuong;
+    }
+
+    public Float getDonGia() {
+        return donGia;
+    }
+
+    public void setDonGia(Float donGia) {
+        this.donGia = donGia;
+    }
+
+    public HoaDon getHoaDon() {
+        return hoaDon;
+    }
+
+    public void setHoaDon(HoaDon hoaDon) {
+        this.hoaDon = hoaDon;
+    }
 }
