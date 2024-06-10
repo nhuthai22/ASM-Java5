@@ -20,6 +20,7 @@ public class BanhAPI {
    
     @PostMapping("/get_banh")
     public ResponseEntity<?> getBanh() {
+        //lưu trữ các cặp khóa-giá trị trong bản đồ
         Map<String, Object> result = new HashMap<>();
         try {
             List<Banh> listBanh = banhService.findBanhAll();
@@ -35,6 +36,7 @@ public class BanhAPI {
     }
     
     @PostMapping("/get_banh_byId")
+    //  RequestParam lấy dữ liệu từ các yêu cầu GET hoặc POST từ bánh
     public ResponseEntity<Map<String, Object>> getBanhById(@RequestParam("id") int idBanh) {
         Map<String, Object> result = new HashMap<>();
         try {
