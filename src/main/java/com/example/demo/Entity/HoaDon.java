@@ -15,7 +15,7 @@ public class HoaDon {
     @Column(name = "ngay")
     private LocalDateTime ngay;
 
-    @Column(name = "Tong_Tien")
+    @Column(name = "tong_tien")
     private Float tongTien;
 
     @OneToMany(mappedBy = "hoaDon", cascade = CascadeType.ALL)
