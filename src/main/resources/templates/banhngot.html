@@ -75,29 +75,34 @@
             </nav>
         </div>
     </header>
-    
-    <section class="category-toolbar">
+
+        <section class="category-toolbar">
+            <div class="container">
+                <div class="row">
+                    <form id="category_filter" class="row gx-3" action="https://phuclong.com.vn/category/thuc-uong">
+                        <div class="col-12 col-sm-4 mb-3">
+                            <label for="price-range" class="form-label">Theo giá</label>
+                            <select name="price-range" id="price-range" class="form-select form-select-sm">
+                                <option selected value="">Không lựa chọn</option>
+                                <option value="asc">Từ thấp đến cao</option>
+                                <option value="desc">Từ cao đến thấp</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    <section class="product-list">
         <div class="container">
-            <div class="row">
-                <form id="category_filter" class="row gx-3" action="https://phuclong.com.vn/category/thuc-uong">  
-                    <div class="col-12 col-sm-4 mb-3">
-                        <label for="price-range" class="form-label">Theo giá</label>
-                        <select name="price-range" id="price-range" class="form-select form-select-sm">
-                            <option selected value="">Không lựa chọn</option>
-                            <option value="asc">Từ thấp đến cao</option>
-                            <option value="desc">Từ cao đến thấp</option>
-                        </select>
-                    </div>
-                </form>
+            <div class="row" id="product-list-row">
+                <!-- Các sản phẩm sẽ được chèn vào đây -->
             </div>
         </div>
     </section>
 
-	<div class="container">
-        <div class="row"></div>
-    </div>
-    
-    <footer id="footer">
+
+<footer id="footer">
         <div class="f-bot">
             <div class="container">
                 <div class="row">
@@ -168,43 +173,48 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
- 	<script>
-        async function addToCart(productId, productName, productPrice) {
-            try {
-                // Gửi yêu cầu đến endpoint API để thêm sản phẩm vào giỏ hàng
-                const response = await axios.post('/add_to_cart', {
-                    productId: productId,
-                    productName: productName,
-                    productPrice: productPrice
-                });
+<script>
+    async function addToCart(productId, productName, productPrice) {
+        try {
+            const response = await axios.post('/add_to_cart', {
+                productId: productId,
+                productName: productName,
+                productPrice: productPrice
+            });
 
-                // Kiểm tra xem yêu cầu đã được xử lý thành công hay không
-                if (response.data.status) {
-                    alert('Sản phẩm đã được thêm vào giỏ hàng!');
-                    // Sau khi thêm sản phẩm vào giỏ hàng thành công, bạn có thể chuyển người dùng đến trang giỏ hàng
-                    window.location.href = '/cart';
-                } else {
-                    alert('Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng!');
-                }
-            } catch (error) {
-                console.error('Lỗi khi thêm sản phẩm vào giỏ hàng:', error);
+            if (response.data.status) {
+                alert('Sản phẩm đã được thêm vào giỏ hàng!');
+                window.location.href = '/cart';
+            } else {
+                alert('Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng!');
             }
+        } catch (error) {
+            console.error('Lỗi khi thêm sản phẩm vào giỏ hàng:', error);
         }
+    }
 
-        async function fetchTraSuaData() {
-            try {
-                // Gọi API để lấy dữ liệu Trà Sữa
-                const response = await axios.post('/get_banh');
-                const data = response.data;
+    async function fetchTraSuaData(sortOrder = '') {
+        try {
+            const response = await axios.post('/get_banh');
+            let data = response.data;
 
-                // Kiểm tra xem cuộc gọi API có thành công hay không
-                if (data.status) {
-                    // Render HTML cho mỗi mục Banh
-                    data.data.forEach(traSua => {
-                        const productItem = `
+            if (data.status) {
+                // Sắp xếp dữ liệu theo thứ tự đã chọn
+                if (sortOrder === 'asc') {
+                    data.data.sort((a, b) => a.gia - b.gia);
+                } else if (sortOrder === 'desc') {
+                    data.data.sort((a, b) => b.gia - a.gia);
+                }
+
+                // Xóa nội dung cũ
+                document.querySelector('#product-list-row').innerHTML = '';
+
+                // Render HTML cho mỗi mục Banh
+                data.data.forEach(traSua => {
+                    const productItem = `
                         <div class="col-sm-3 col-6 product-item">
                             <div class="card">
-                                <img class="card-img-top lazy" src="${traSua.img}">
+                                <img class="card-img-top lazy" src="${traSua.img}" alt="${traSua.ten}">
                                 <div class="card-body">
                                     <h5 class="card-title">${traSua.ten}</h5>
                                     <p class="card-text">${traSua.gia} đ</p>
@@ -218,21 +228,25 @@
                             </div>
                         </div>
                     `;
-                        // Chèn HTML mục sản phẩm vào container
-                        document.querySelector('.row').insertAdjacentHTML('beforeend', productItem);
-                    });
-                } else {
-                    console.error(data.message);
-                }
-            } catch (error) {
-                console.error('Lỗi khi lấy dữ liệu:', error);
+                    document.querySelector('#product-list-row').insertAdjacentHTML('beforeend', productItem);
+                });
+            } else {
+                console.error(data.message);
             }
+        } catch (error) {
+            console.error('Lỗi khi lấy dữ liệu:', error);
         }
+    }
 
-        // Gọi hàm fetchTraSuaData khi trang được tải
-        window.onload = function() {
-            fetchTraSuaData();
-        };
-    </script>
+    window.onload = function() {
+        fetchTraSuaData();
+
+        // Lắng nghe sự thay đổi của dropdown sắp xếp
+        document.getElementById('price-range').addEventListener('change', function() {
+            const sortOrder = this.value;
+            fetchTraSuaData(sortOrder);
+        });
+    };
+</script>
 </body>
 </html>
