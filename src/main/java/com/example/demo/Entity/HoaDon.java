@@ -2,6 +2,7 @@ package com.example.demo.Entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,8 +19,8 @@ public class HoaDon {
     @Column(name = "tong_tien")
     private Float tongTien;
 
-    @OneToMany(mappedBy = "hoaDon", cascade = CascadeType.ALL)
-    private List<ChiTietHoaDon> chiTietHoaDons;
+    @OneToMany(mappedBy = "hoa_don", cascade = CascadeType.ALL)
+    private List<ChiTietHoaDon> chiTietHoaDons = new ArrayList<>();
 
     // Getters và Setters
     public Integer getMaHD() {
