@@ -42,16 +42,16 @@
                         <a class="nav-link text-white" th:href="@{/gioithieu}">Giới thiệu</a>
                     </li>
                     <!-- HTML -->
-                    <li class="nav-item dropdown" >
-
-                        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle"></i>Tài khoản
-                        </a>
-                        <ul class="dropdown-menu">
-<li><a class="dropdown-item" th:href="@{/Login}">Đăng nhập</a></li>
-                            <li><a class="dropdown-item" th:href="@{/Register}">Đăng ký</a></li>
-                        </ul>
-                    </li>
+                                        <!-- HTML -->
+                   <li class="nav-item dropdown" id="accountDropdown">
+   						<a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        					<i class="bi bi-person-circle"></i> Tài khoản
+    					</a>
+    					<ul class="dropdown-menu">
+        					<li><a class="dropdown-item" th:href="@{/Login}">Đăng nhập</a></li>
+        					<li><a class="dropdown-item" th:href="@{/Register}">Đăng ký</a></li>
+    					</ul>
+					</li>
 
                 </ul>
             </div>
@@ -97,7 +97,7 @@
                             <option value="asc">Từ thấp đến cao</option>
                             <option value="desc">Từ cao đến thấp</option>
                         </select>
-</div>
+					</div>
                     <!-- <div class="col-12 col-sm-4 mb-3">
                         <label for="product-name" class="form-label">Tìm kiếm</label>
                         <div class="input-group">
@@ -146,7 +146,7 @@ placeholder="Tên sản phẩm"
                             <li><a class="btn-icon"  href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
                         </ul>
                     </div> -->
-<div class="col-md-4 col-xs-12 f_follow">
+							<div class="col-md-4 col-xs-12 f_follow">
                             <label for="newsletter-email">Đăng ký nhận tin khuyến mãi</label>
                             <form method="POST" action="https://phuclong.com.vn/send" accept-charset="UTF-8"
                                 class="form-inline" id="form-newsletter"><input name="_token" type="hidden" value="vfPdIxz240NYk3JAlRx7eIGd3tkSOzd777UAoq1x">
@@ -229,7 +229,7 @@ placeholder="Tên sản phẩm"
 
                 // Kiểm tra xem cuộc gọi API có thành công hay không
                 if (data.status) {
-                    // Render HTML cho mỗi mục Trà Sữa
+                    // Render HTML cho mỗi mục Banh
                     data.data.forEach(traSua => {
                         const productItem = `
                         <div class="col-sm-3 col-6 product-item">
@@ -237,20 +237,19 @@ placeholder="Tên sản phẩm"
                                 <img class="card-img-top lazy" src="${traSua.img}">
                                 <div class="card-body">
                                     <h5 class="card-title">${traSua.ten}</h5>
-                                    <p class="card-text">${traSua.moTa}</p>
                                     <p class="card-text">${traSua.gia} đ</p>
                                     <button class="btn btn-primary add-to-cart"
                                         onclick="addToCart('${traSua.id}', '${traSua.ten}', '${traSua.gia}')">
                                     Đặt hàng
                                     </button>
                                     <a href="/ctspTraSua/${traSua.id}" class="btn btn-primary">Chi tiết</a>
-                                    
+
                                 </div>
                             </div>
                         </div>
                     `;
                         // Chèn HTML mục sản phẩm vào container
-document.querySelector('.row').insertAdjacentHTML('beforeend', productItem);
+                        document.querySelector('.row').insertAdjacentHTML('beforeend', productItem);
                     });
                 } else {
                     console.error(data.message);
@@ -265,6 +264,25 @@ document.querySelector('.row').insertAdjacentHTML('beforeend', productItem);
             fetchTraSuaData();
         };
     </script>
+    <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        var user = localStorage.getItem('user');
+        if (user) {
+            document.getElementById('accountDropdown').innerHTML = `
+                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle"></i> ${user}
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/index" onclick="logout()">Đăng xuất</a></li>
+                </ul>
+            `;
+        }
+    });
 
+    function logout() {
+        localStorage.removeItem('user');
+        window.location.href = "/index";
+    }
+    </script>
 </body>
 </html>
