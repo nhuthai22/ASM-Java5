@@ -16,7 +16,7 @@ CREATE TABLE LoaiSanPham (
 CREATE TABLE SanPham (
     id INT PRIMARY KEY IDENTITY(1,1),
     LSPID int NULL,
-	tenSP NVARCHAR(255) NULL,
+	TenSP NVARCHAR(255) NULL,
     Gia money ,
 	quantity int null,
 	images NVARCHAR(255),
