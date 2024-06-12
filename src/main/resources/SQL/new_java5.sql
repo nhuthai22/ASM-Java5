@@ -3,21 +3,23 @@ create database demoJava5;
 
  CREATE TABLE Account (
     id INT PRIMARY KEY IDENTITY(1,1),
-    username NVARCHAR(255) NOT NULL,
-    password NVARCHAR(255) NOT NULL,
-    email NVARCHAR(255) NOT NULL
+    username NVARCHAR(255) NULL,
+    password NVARCHAR(255) NULL,
+    email NVARCHAR(255) NULL
 );
 
 CREATE TABLE LoaiSanPham (
     LSPID INT PRIMARY KEY IDENTITY(1,1),
-    TenLoaiSanPham VARCHAR(255) NOT NULL
+    TenLoaiSanPham NVARCHAR(255) NULL
 );
 
 CREATE TABLE SanPham (
     id INT PRIMARY KEY IDENTITY(1,1),
-    LSPID int NOT NULL,
-	tenSP NVARCHAR(255) NOT NULL,
+    LSPID int NULL,
+	tenSP NVARCHAR(255) NULL,
     Gia money ,
+	quantity int null,
+	images NVARCHAR(255),
     FOREIGN KEY (LSPID) REFERENCES LoaiSanPham(LSPID)
 );
 
@@ -31,7 +33,7 @@ CREATE TABLE HoaDonChiTiet (
     MaHD INT PRIMARY KEY IDENTITY(1,1),
     ID INT,
     SoLuong INT,
-    Gia DECIMAL(10, 2) NOT NULL,
+    Gia DECIMAL(10, 2) NULL,
     FOREIGN KEY (MaHD) REFERENCES HoaDon(MaHD),
     FOREIGN KEY (id) REFERENCES SanPham(id)
 );
