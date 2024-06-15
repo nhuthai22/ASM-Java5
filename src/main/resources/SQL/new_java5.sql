@@ -1,6 +1,6 @@
 ﻿CREATE DATABASE ASM_Java55;
 USE ASM_Java55;
--- 123
+
 CREATE TABLE Account (
     id INT PRIMARY KEY IDENTITY(1,1),
     username NVARCHAR(255) NULL,
