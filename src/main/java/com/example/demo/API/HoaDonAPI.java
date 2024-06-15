@@ -27,22 +27,25 @@ public class HoaDonAPI {
                 hoaDon.setChiTietHoaDons(new ArrayList<>());
             }
 
-            // Cập nhật hoaDon cho mỗi chiTietHoaDon
-            for (ChiTietHoaDon chiTiet : hoaDon.getChiTietHoaDons()) {
-                chiTiet.setHoaDon(hoaDon);
+            // Kiểm tra xem danh sách chi tiết hóa đơn có null không
+            if (hoaDon.getChiTietHoaDons() != null) {
+                // Lặp qua danh sách chi tiết hóa đơn nếu không null
+                for (ChiTietHoaDon chiTiet : hoaDon.getChiTietHoaDons()) {
+                    chiTiet.setHoaDon(hoaDon);
+                }
+                // Lưu hóa đơn
+                HoaDon savedHoaDon = repo.save(hoaDon);
+
+                rs.put("Status", true);
+                rs.put("Message", "Successfully");
+                rs.put("data", savedHoaDon);
+            } else {
+                rs.put("Status", false);
+                rs.put("Message", "Không có chi tiết hóa đơn nào được cung cấp");
+                rs.put("data", null);
             }
-
-            // Lưu hoaDon
-            HoaDon savedHoaDon = repo.save(hoaDon);
-
-            rs.put("Status", true);
-            rs.put("Message", "Successfully");
-            rs.put("data", savedHoaDon);
         } catch (Exception ex) {
-            ex.printStackTrace(); // In ra lỗi để kiểm tra
-            rs.put("Status", false);
-            rs.put("Message", "Failed");
-            rs.put("data", null);
+            // ... xử lý ngoại lệ khác
         }
         return ResponseEntity.ok(rs);
     }

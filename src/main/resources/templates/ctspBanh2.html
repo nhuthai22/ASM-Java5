@@ -659,8 +659,8 @@ a:hover {
         // Create card image
         const cardImg = document.createElement('img');
         cardImg.classList.add('card-img-top');
-        cardImg.src = product.img;
-        cardImg.alt = product.ten;
+        cardImg.src = product.images;
+
 
         // Create card body
         const cardBody = document.createElement('div');
@@ -669,7 +669,7 @@ a:hover {
         // Create card title
         const cardTitle = document.createElement('h5');
         cardTitle.classList.add('card-title');
-        cardTitle.textContent = product.ten;
+        cardTitle.textContent = product.tenSP;
 
         // Create card description
         const cardText = document.createElement('p');
@@ -685,7 +685,7 @@ a:hover {
         const orderButton = document.createElement('button');
         orderButton.classList.add('btn', 'btn-primary', 'add-to-cart');
         orderButton.dataset.id = product.id;
-        orderButton.dataset.name = product.ten;
+        orderButton.dataset.name = product.tenSP;
         orderButton.dataset.price = product.gia;
         orderButton.textContent = 'Thêm vô giỏ hàng';
 
@@ -713,7 +713,7 @@ a:hover {
         document.querySelector('.row').appendChild(productContainer);
 
         orderButton.addEventListener('click', function() {
-            addToCart(product.id, product.ten, product.gia);
+            addToCart(product.id, product.tenSP, product.gia);
         });
 
     }
@@ -747,7 +747,7 @@ a:hover {
             cart[itemIndex].quantity += 1;
         } else {
             // Nếu sản phẩm chưa có trong giỏ hàng, thêm vào với số lượng là 1
-            cart.push({ id: id, name: name, price: price, quantity: 1 });
+            cart.push({ id: id, name: name, price: price, quantity: 1 ,type:"banh"});
         }
 
         // Lưu giỏ hàng vào Local Storage

@@ -1,53 +1,32 @@
 package com.example.demo.Entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "chi_tiet_hoa_don")
 public class ChiTietHoaDon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(name = "so_luong")
-    private Integer soLuong;
-    @Column(name = "don_gia")
-    private Float donGia;
+    private Integer MaHDCT;
 
     @ManyToOne
-    @JoinColumn(name = "maHD", nullable = false)
+    @JoinColumn(name = "MaHD", nullable = false)
     private HoaDon hoaDon;
 
-    // Getters và Setters
-    public Integer getId() {
-        return id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "id", nullable = false)
+    private SanPham sanPham;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    private Integer SoLuong;
+    private Double Gia;
 
-    public Integer getSoLuong() {
-        return soLuong;
-    }
 
-    public void setSoLuong(Integer soLuong) {
-        this.soLuong = soLuong;
-    }
 
-    public Float getDonGia() {
-        return donGia;
-    }
 
-    public void setDonGia(Float donGia) {
-        this.donGia = donGia;
-    }
 
-    public HoaDon getHoaDon() {
-        return hoaDon;
-    }
-
-    public void setHoaDon(HoaDon hoaDon) {
-        this.hoaDon = hoaDon;
-    }
 }

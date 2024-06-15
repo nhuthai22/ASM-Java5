@@ -1,57 +1,31 @@
 package com.example.demo.Entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "Hoa_Don")
 public class HoaDon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer maHD;
+    private Integer MaHD;
 
-    @Column(name = "ngay")
-    private LocalDateTime ngay;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date Ngay;
 
-    @Column(name = "tong_tien")
-    private Float tongTien;
+    private Float TongTien;
 
-    @OneToMany(mappedBy = "hoa_don", cascade = CascadeType.ALL)
-    private List<ChiTietHoaDon> chiTietHoaDons = new ArrayList<>();
+    @OneToMany(mappedBy = "hoaDon", cascade = CascadeType.ALL)
+    private List<ChiTietHoaDon> chiTietHoaDons;
 
-    // Getters và Setters
-    public Integer getMaHD() {
-        return maHD;
     }
 
-    public void setMaHD(Integer maHD) {
-        this.maHD = maHD;
-    }
-
-    public LocalDateTime getNgay() {
-        return ngay;
-    }
-
-    public void setNgay(LocalDateTime ngay) {
-        this.ngay = ngay;
-    }
-
-    public Float getTongTien() {
-        return tongTien;
-    }
-
-    public void setTongTien(Float tongTien) {
-        this.tongTien = tongTien;
-    }
-
-    public List<ChiTietHoaDon> getChiTietHoaDons() {
-        return chiTietHoaDons;
-    }
-
-    public void setChiTietHoaDons(List<ChiTietHoaDon> chiTietHoaDons) {
-        this.chiTietHoaDons = chiTietHoaDons;
-    }
-}

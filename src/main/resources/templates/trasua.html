@@ -220,7 +220,7 @@
                     keyword: keyword
                 });
                 let data = response.data;
-
+                console.log(data)
                 if (data.status) {
                     // Sắp xếp dữ liệu theo thứ tự đã chọn
                     if (sortOrder === 'asc') {
@@ -238,17 +238,18 @@
                     document.querySelector('#product-list-row').innerHTML = '';
 
                     // Render HTML cho mỗi mục Trà Sữa
+                    console.log(data)
                     data.data.forEach(traSua => {
                         const productItem = `
                             <div class="col-sm-3 col-6 product-item">
                                 <div class="card">
-                                    <img class="card-img-top lazy" src="${traSua.img}" alt="${traSua.ten}">
+                                    <img class="card-img-top lazy" src="${traSua.images}" alt="${traSua.tenSP}">
                                     <div class="card-body">
-                                        <h5 class="card-title">${traSua.ten}</h5>
-                                        <p class="card-text">${traSua.moTa}</p>
+                                        <h5 class="card-title">${traSua.tenSP}</h5>
+                                        <p class="card-text">${traSua.mo_ta}</p>
                                         <p class="card-text">${traSua.gia} đ</p>
                                         <button class="btn btn-primary add-to-cart"
-                                            onclick="addToCart('${traSua.id}', '${traSua.ten}', '${traSua.gia}')">
+                                            onclick="addToCart('${traSua.id}', '${traSua.TenSP}', '${traSua.gia}')">
                                         Đặt hàng
                                         </button>
                                         <a href="/ctspTraSua/${traSua.id}" class="btn btn-primary">Chi tiết</a>
