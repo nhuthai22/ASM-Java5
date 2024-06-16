@@ -42,17 +42,17 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" th:href="@{/gioithieu}">Giới thiệu</a>
-                        </li>          
+                        </li>
                         <!-- HTML -->
                         <li class="nav-item dropdown" id="accountDropdown">
-   						<a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        					<i class="bi bi-person-circle"></i> Tài khoản
-    					</a>
-    					<ul class="dropdown-menu">
-        					<li><a class="dropdown-item" th:href="@{/Login}">Đăng nhập</a></li>
-        					<li><a class="dropdown-item" th:href="@{/Register}">Đăng ký</a></li>
-    					</ul>
-					</li>
+                            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle"></i> Tài khoản
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" th:href="@{/Login}">Đăng nhập</a></li>
+                                <li><a class="dropdown-item" th:href="@{/Register}">Đăng ký</a></li>
+                            </ul>
+                        </li>
 						
                     </ul>
                 </div>
@@ -317,6 +317,26 @@
         localStorage.removeItem('user');
         window.location.href = "/index";
     }
+    </script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            var user = localStorage.getItem('user');
+            if (user) {
+                document.getElementById('accountDropdown').innerHTML = `
+                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle"></i> ${user}
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/index" onclick="logout()">Đăng xuất</a></li>
+                </ul>
+            `;
+            }
+        });
+
+        function logout() {
+            localStorage.removeItem('user');
+            window.location.href = "/index";
+        }
     </script>
 </body>
 </html>
