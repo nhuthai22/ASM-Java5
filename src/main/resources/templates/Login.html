@@ -58,14 +58,14 @@
                     </li>
                     <!-- HTML -->
                     <li class="nav-item dropdown" id="accountDropdown">
-                        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-person-circle"></i> Tài khoản
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" th:href="@{/Login}">Đăng nhập</a></li>
-                            <li><a class="dropdown-item" th:href="@{/Register}">Đăng ký</a></li>
-                        </ul>
-                    </li>
+    					<a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        					<i class="bi bi-person-circle"></i> Tài khoản
+    					</a>
+    					<ul class="dropdown-menu">
+        					<li><a class="dropdown-item" th:href="@{/Login}">Đăng nhập</a></li>
+        					<li><a class="dropdown-item" th:href="@{/Register}">Đăng ký</a></li>
+    					</ul>
+					</li>
 
                 </ul>
             </div>
@@ -197,35 +197,36 @@
 <!-- JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-	function login() {
-    	// Get username and password from form
-    	var username = document.getElementById("username").value;
-    	var password = document.getElementById("password").value;
+    function login() {
+        // Get username and password from form
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
 
-    	// Create payload
-    	var data = {
-        	username: username,
-        	password: password
-    	};
+        // Create payload
+        var data = {
+            username: username,
+            password: password
+        };
 
-    	// Send POST request to login API
-    	axios.post('/login', data)
-        	.then(function (response) {
-            // Check if login was successful
-            if (response.data === "success") {              
-                window.location.href = "/index";
-            } else {              
-                alert(response.data);
-            }
-        })
-        .catch(function (error) {
-            // Handle login error
-            console.error(error);
-            alert('Đăng nhập thất bại!');
-        });
-	}
-</script>
-<script type="text/javascript">
+        // Send POST request to login API
+        axios.post('/login', data)
+            .then(function (response) {
+                // Check if login was successful
+                if (response.data === "success") {
+                    // Save username to local storage
+                    localStorage.setItem('user', username);
+                    window.location.href = "/index";
+                } else {
+                    alert(response.data);
+                }
+            })
+            .catch(function (error) {
+                // Handle login error
+                console.error(error);
+                alert('Đăng nhập thất bại!');
+            });
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         var user = localStorage.getItem('user');
         if (user) {
@@ -245,6 +246,8 @@
         window.location.href = "/index";
     }
 </script>
+
+
 </body>
 </html>
                 

@@ -27,5 +27,15 @@ public class HoaDon {
     @OneToMany(mappedBy = "hoaDon", cascade = CascadeType.ALL)
     private List<ChiTietHoaDon> chiTietHoaDons;
 
+	public Object getChiTietHoaDons() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setChiTietHoaDons(ArrayList arrayList) {
+		// TODO Auto-generated method stub
+		
+	}
+
     }
 
