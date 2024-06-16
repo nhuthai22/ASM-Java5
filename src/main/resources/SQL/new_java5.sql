@@ -28,7 +28,7 @@ CREATE TABLE San_Pham (
 CREATE TABLE Hoa_Don (
                          MaHD INT PRIMARY KEY IDENTITY(1,1),
                          Ngay DATETIME NOT NULL,
-                         TongTien FLOAT
+                         Tong_tien FLOAT
 );
 
 CREATE TABLE chi_tiet_hoa_don (
