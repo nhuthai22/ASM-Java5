@@ -61,4 +61,9 @@ public class HomeController {
     public String getCtspBanh(){
         return "/ctspBanh2"; 
     }
+
+    @GetMapping("/cthoadon")
+    public String gethoadon(){
+        return "/cthoadon";
+    }
 }

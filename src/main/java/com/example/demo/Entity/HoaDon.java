@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,18 +23,11 @@ public class HoaDon {
 
     private Float TongTien;
 
-    @OneToMany(mappedBy = "hoaDon", cascade = CascadeType.ALL)
-    private List<ChiTietHoaDon> chiTietHoaDons;
+    @OneToMany(mappedBy = "hoaDon", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ChiTietHoaDon> chiTietHoaDons = new ArrayList<>();
 
-	public Object getChiTietHoaDons() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setChiTietHoaDons(ArrayList arrayList) {
-		// TODO Auto-generated method stub
-		
-	}
-
+    public void addChiTietHoaDon(ChiTietHoaDon chiTietHoaDon) {
+        chiTietHoaDons.add(chiTietHoaDon);
+        chiTietHoaDon.setHoaDon(this);
     }
-
+}
