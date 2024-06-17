@@ -74,11 +74,11 @@
             </nav>
         </div>
     </header>
-    
+
     <section class="category-toolbar">
         <div class="container">
             <div class="row">
-                <form id="category_filter" class="row gx-3" action="https://phuclong.com.vn/category/thuc-uong">  
+                <form id="category_filter" class="row gx-3" action="https://phuclong.com.vn/category/thuc-uong">
                     <div class="col-12 col-sm-4 mb-3">
                         <label for="price-range" class="form-label">Theo giá</label>
                         <select name="price-range" id="price-range" class="form-select form-select-sm">
@@ -95,7 +95,7 @@
 	<div class="container">
         <div class="row"></div>
     </div>
-    
+
     <footer id="footer">
         <div class="f-bot">
             <div class="container">
@@ -197,21 +197,23 @@
                 const data = response.data;
 
                 // Kiểm tra xem cuộc gọi API có thành công hay không
+
                 if (data.status) {
                     // Render HTML cho mỗi mục Banh
-                    data.data.forEach(traSua => {
+                    data.data.forEach(banh => {
                         const productItem = `
-                        <div class="col-sm-3 col-6 product-item">
+                        <div class="col-sm-3 col-6 product-item ">
                             <div class="card">
-                                <img class="card-img-top lazy" src="${traSua.images}">
+                                <img class="card-img-top lazy" src="${banh.images}">
                                 <div class="card-body">
-                                    <h5 class="card-title">${traSua.tenSP}</h5>
-                                    <p class="card-text">${traSua.gia} đ</p>
+                                    <h5 class="card-title">${banh.tenSP}</h5>
+
+                                    <p class="card-text">${banh.gia} đ</p>
                                     <button class="btn btn-primary add-to-cart"
-                                        onclick="addToCart('${traSua.id}', '${traSua.ten}', '${traSua.gia}')">
+                                        onclick="addToCart('${banh.id}', '${banh.ten}', '${banh.gia}')">
                                     Đặt hàng
                                     </button>
-                                    <a href="/ctspBanh/${traSua.id}" class="btn btn-primary">Chi tiết</a>
+                                    <a href="/ctspBanh/${banh.id}" class="btn btn-primary">Chi tiết</a>
 
                                 </div>
                             </div>
