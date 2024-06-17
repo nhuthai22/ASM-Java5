@@ -75,26 +75,46 @@
         </div>
     </header>
 
-    <section class="category-toolbar">
+        <section class="category-toolbar">
+            <div class="container">
+                <div class="row">
+                    <form id="category_filter" class="row gx-3">
+                        <div class="col-12 col-sm-6 mb-3">
+                            <label for="price-range" class="form-label">Theo giá</label>
+                            <select name="price-range" id="price-range" class="form-select form-select-sm">
+                                <option selected value="">Không lựa chọn</option>
+                                <option value="asc">Từ thấp đến cao</option>
+                                <option value="desc">Từ cao đến thấp</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <label for="product-name" class="form-label">Tìm kiếm</label>
+                            <div class="input-group input-group-sm" > <!-- Thêm lớp input-group-sm -->
+                                <input
+                                        class="form-control " style="height: 30px"
+                                        placeholder="Tên sản phẩm"
+                                        name="keyword"
+                                        id="product-name"
+                                        type="text"
+                                        value=""
+                                >
+                                <button class="btn btn-outline-primary" style="position: relative; top: -11px; right:0;" type="button" id="search-button" ><i class="fa fa-search "></i></button>
+                            </div>
+                        </div>
+                        <input type="hidden" name="hideSticky" value="1" class="d-none">
+
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    <section class="product-list">
         <div class="container">
-            <div class="row">
-                <form id="category_filter" class="row gx-3" action="https://phuclong.com.vn/category/thuc-uong">
-                    <div class="col-12 col-sm-4 mb-3">
-                        <label for="price-range" class="form-label">Theo giá</label>
-                        <select name="price-range" id="price-range" class="form-select form-select-sm">
-                            <option selected value="">Không lựa chọn</option>
-                            <option value="asc">Từ thấp đến cao</option>
-                            <option value="desc">Từ cao đến thấp</option>
-                        </select>
-                    </div>
-                </form>
+            <div class="row" id="product-list-row">
+                <!-- Các sản phẩm sẽ được chèn vào đây -->
             </div>
         </div>
     </section>
-
-	<div class="container">
-        <div class="row"></div>
-    </div>
 
     <footer id="footer">
         <div class="f-bot">
@@ -190,37 +210,52 @@
             }
         }
 
-        async function fetchTraSuaData() {
+        async function fetchTraSuaData(sortOrder = '', keyword = '') {
             try {
-                // Gọi API để lấy dữ liệu Trà Sữa
-                const response = await axios.post('/get_banh');
-                const data = response.data;
-
-                // Kiểm tra xem cuộc gọi API có thành công hay không
-
+                const response = await axios.post('/get_banh', {
+                    sortOrder: sortOrder,
+                    keyword: keyword
+                });
+                let data = response.data;
+                console.log(data)
                 if (data.status) {
-                    // Render HTML cho mỗi mục Banh
-                    data.data.forEach(banh => {
+                    // Sắp xếp dữ liệu theo thứ tự đã chọn
+                    if (sortOrder === 'asc') {
+                        data.data.sort((a, b) => a.gia - b.gia);
+                    } else if (sortOrder === 'desc') {
+                        data.data.sort((a, b) => b.gia - a.gia);
+                    }
+
+                    // Tìm kiếm theo từ khóa
+                    if (keyword) {
+                        data.data = data.data.filter(item => item.ten.toLowerCase().includes(keyword.toLowerCase()));
+                    }
+
+                    // Xóa nội dung cũ
+                    document.querySelector('#product-list-row').innerHTML = '';
+
+                    // Render HTML cho mỗi mục Trà Sữa
+                    console.log(data)
+                    data.data.forEach(traSua => {
                         const productItem = `
-                        <div class="col-sm-3 col-6 product-item ">
-                            <div class="card">
-                                <img class="card-img-top lazy" src="${banh.images}">
-                                <div class="card-body">
-                                    <h5 class="card-title">${banh.tenSP}</h5>
+                            <div class="col-sm-3 col-6 product-item">
+                                <div class="card">
+                                    <img class="card-img-top lazy" src="${traSua.images}" alt="${traSua.tenSP}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${traSua.tenSP}</h5>
+                                        <p class="card-text">${traSua.mo_ta}</p>
+                                        <p class="card-text">${traSua.gia} đ</p>
+                                        <button class="btn btn-primary add-to-cart"
+                                            onclick="addToCart('${traSua.id}', '${traSua.TenSP}', '${traSua.gia}')">
+                                        Đặt hàng
+                                        </button>
+                                        <a href="/ctspTraSua/${traSua.id}" class="btn btn-primary">Chi tiết</a>
 
-                                    <p class="card-text">${banh.gia} đ</p>
-                                    <button class="btn btn-primary add-to-cart"
-                                        onclick="addToCart('${banh.id}', '${banh.ten}', '${banh.gia}')">
-                                    Đặt hàng
-                                    </button>
-                                    <a href="/ctspBanh/${banh.id}" class="btn btn-primary">Chi tiết</a>
-
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    `;
-                        // Chèn HTML mục sản phẩm vào container
-                        document.querySelector('.row').insertAdjacentHTML('beforeend', productItem);
+                        `;
+                        document.querySelector('#product-list-row').insertAdjacentHTML('beforeend', productItem);
                     });
                 } else {
                     console.error(data.message);
@@ -230,10 +265,24 @@
             }
         }
 
-        // Gọi hàm fetchTraSuaData khi trang được tải
         window.onload = function() {
             fetchTraSuaData();
+
+            // Lắng nghe sự thay đổi của dropdown sắp xếp
+            document.getElementById('price-range').addEventListener('change', function() {
+                const sortOrder = this.value;
+                const keyword = document.getElementById('product-name').value;
+                fetchTraSuaData(sortOrder, keyword);
+            });
+
+            // Lắng nghe sự kiện nhấn nút tìm kiếm
+            document.getElementById('search-button').addEventListener('click', function() {
+                const sortOrder = document.getElementById('price-range').value;
+                const keyword = document.getElementById('product-name').value;
+                fetchTraSuaData(sortOrder, keyword);
+            });
         };
+
     </script>
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {
